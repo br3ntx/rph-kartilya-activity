@@ -389,7 +389,7 @@ function renderChrome(){
 function rerender(){main.innerHTML='';const st=ps[cur]=ps[cur]||{};S[cur].render(main,st);renderChrome();if(overlay)main.appendChild(overlay)}
 let overlay=null;
 function closeOv(){overlay=null;rerender()}
-function go(i){i=Math.max(0,Math.min(S.length-1,i));cur=i;overlay=null;store.set('cur',cur);rerender()}
+function go(i){i=Math.max(0,Math.min(S.length-1,i));cur=i;overlay=null;store.set('cur',cur);rerender();const s=main.firstElementChild;s&&s.classList.add('enter')}
 function openScores(){
   const build=()=>h('div',{class:'ov',onclick:e=>{if(e.target===e.currentTarget)closeOv()}},h('div',{class:'panel box',style:'display:flex;flex-direction:column;gap:12px'},
     h('div',{class:'row',style:'justify-content:space-between'},h('span',{class:'disp',style:'font-size:26px'},'Scoreboard'),h('button',{class:'mini','aria-label':'Close',onclick:closeOv},'×')),
