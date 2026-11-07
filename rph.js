@@ -45,7 +45,12 @@ const PICS=[
     'img/kartilya4.jpg'
  ],
   fact:'Jacinto wrote the original <b>Kartilya ng Katipunan</b>. Like a guidebook for members, it served as the organization’s <b>moral and ethical guide</b>.'},
- {a:'TREASURER',hint:'One of Jacinto’s jobs in the Katipunan',pics:['💰','🏦','🧾','🔐'],
+ {a:'TREASURER',hint:'One of Jacinto’s jobs in the Katipunan',pics:[
+     'img/treasurer1.jpg',
+     'img/treasurer2.jpg',
+     'img/treasurer3.jpg',
+     'img/treasurer4.jpg'
+ ],
   fact:'Jacinto didn’t stop at writing — he was also the Katipunan’s <b>spokesperson</b> and <b>treasurer</b>.'},
  {a:'KALAYAAN',hint:'“Freedom” — and the Katipunan’s newspaper',pics:['🕊️','🔓','🗽','📰'],
   fact:'Jacinto contributed to the Katipunan’s newspaper, <b><i>Kalayaan</i></b> (“Freedom”), under the pen name <b>Dimas-Ilaw</b>.'}
