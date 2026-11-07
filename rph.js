@@ -1,4 +1,4 @@
-/* =========================================================
+    /* =========================================================
    CONTENT — edit here.
    4 Pics 1 Word: each "pics" entry can be an emoji OR an image
    path/URL (e.g. "img/newspaper.jpg") to use real photos.
@@ -38,7 +38,12 @@ const PICS=[
    'img/brain4.jpg'
  ],
   fact:'<b>Emilio Jacinto</b>, born <b>December 15, 1875</b>, became one of the key leaders of the Katipunan and earned the nickname <b>“Brain of the Katipunan”</b> — also called the “Brain of the Revolution.”'},
- {a:'KARTILYA',hint:'A primer — and the guidebook Jacinto wrote',pics:['📖','🔤','✏️','🧒'],
+ {a:'KARTILYA',hint:'A primer — and the guidebook Jacinto wrote',pics:[
+    'img/kartilya1.jpg',
+    'img/kartilya2.jpg',
+    'img/kartilya3.jpg',
+    'img/kartilya4.jpg'
+ ],
   fact:'Jacinto wrote the original <b>Kartilya ng Katipunan</b>. Like a guidebook for members, it served as the organization’s <b>moral and ethical guide</b>.'},
  {a:'TREASURER',hint:'One of Jacinto’s jobs in the Katipunan',pics:['💰','🏦','🧾','🔐'],
   fact:'Jacinto didn’t stop at writing — he was also the Katipunan’s <b>spokesperson</b> and <b>treasurer</b>.'},
