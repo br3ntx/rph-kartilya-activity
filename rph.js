@@ -80,12 +80,9 @@ const CONNECT=[
 const SCEN=[
  {t:'Your org holds a feeding program. One member shows up only for the photo, posts it with #blessed, and leaves before the actual work starts.',o:[2,7,9,13],a:2,why:'The good deed was done for clout, not out of a genuine desire to do good — so it loses its value.',q:'Is a good deed still “good” if it’s mainly done for likes?'},
  {t:'A classmate trusts you with something personal. That night, you post it in the block group chat “as a joke.”',o:[4,7,10,13],a:10,why:'Jacinto says intelligence shows in being careful with words and keeping secrets.',q:'What does “keeping secrets” mean in the age of screenshots?'},
- {t:'Your groupmate says, “I’ll finish my part by Friday, promise!” Friday comes — they’re offline and ghost the group chat.',o:[1,7,8,11],a:7,why:'An honorable person’s word can be trusted. A broken promise breaks that trust.',q:'How do you rebuild trust after breaking your word?'},
+ {t:'Your groupmate says, “I’ll finish my part by Friday, promise!” Friday comes - they’re offline and ghosting the group chat.',o:[1,7,8,11],a:7,why:'An honorable person’s word can be trusted. A broken promise breaks that trust.',q:'How do you rebuild trust after breaking your word?'},
  {t:'A transferee from the province gets teased every day because of their accent. The rest of the class either laughs along or stays quiet.',o:[2,6,8,9],a:9,why:'The Kartilya asks us to stand up for the oppressed and against those who oppress them — silence lets it continue.',q:'What’s a realistic way to “stand up” for someone in class?'},
- {t:'The class president copies answers during a quiz. Soon, half the block decides it’s fine to cheat too.',o:[3,8,11,14],a:11,why:'When the one leading strays, those who follow stray too. A leader’s example spreads.',q:'Rule 11 was written for families in the 1890s. How would you rewrite it for student leaders today?'},
  {t:'When forming groups, one student only invites the rich, popular, good-looking classmates.',o:[3,8,10,13],a:13,why:'A person’s value isn’t determined by status or appearance, but by behavior, honesty, honor, and fairness.',q:'What qualities should actually matter when choosing groupmates?'},
- {t:'During planning, a groupmate says, “She’s a girl, so she’ll just handle the decorations.”',o:[2,4,9,12],a:12,why:'Women are to be treated as partners in life’s hardships — equals, not accessories.',q:'Why was this idea progressive for a revolutionary group in 1892?'},
- {t:'You could submit the whole report under your name for a higher grade, even though your groupmate wrote half of it.',o:[1,4,6,12],a:6,why:'Noble people put honor above self-interest. Taking credit puts self-interest first.',q:'Is a grade worth more than your honor? Why do we sometimes act like it is?'},
  {t:'You comfort a friend who failed an exam… then laugh about it with others behind their back.',o:[3,8,11,14],a:3,why:'True kindness means compassion, love for others, and being truthful — not kindness only to someone’s face.',q:'What’s the difference between being nice and being kind?'},
  {t:'The deadline is tomorrow. You’ve known about it for three weeks, but spent all that time scrolling and gaming.',o:[1,7,8,13],a:8,why:'Lost wealth can be regained, but lost time is gone forever.',q:'What’s one habit that “steals” your time the most?'}
 ];
@@ -181,7 +178,6 @@ function intro(section,n,name,tag,how,covers){
         h('div',null,h('span',{class:'eyebrow'},n==='F'?'Final round':'Round '+n),h('h2',{class:'disp',style:'margin:6px 0 0;font-size:58px;line-height:1'},name),h('p',{style:'margin:8px 0 0;font-size:19px;color:var(--soft)'},tag))),
       h('div',{style:'display:flex;gap:20px'},
         h('div',{class:'panel',style:'flex:1.4;padding:20px 24px;display:flex;flex-direction:column;gap:10px'},h('span',{class:'eyebrow',style:'color:var(--muted)'},'How to play'),how.map(x=>h('div',{style:'font-size:17px;line-height:1.45;display:flex;gap:10px'},h('span',{style:'color:var(--gold)'},'▸'),h('span',{html:x})))),
-        h('div',{class:'panel',style:'flex:1;padding:20px 24px;display:flex;flex-direction:column;gap:10px'},h('span',{class:'eyebrow',style:'color:var(--muted)'},'What it covers'),h('p',{style:'margin:0;font-size:17px;line-height:1.5;color:var(--soft)',html:covers}))
       )
     ));
   });
@@ -367,7 +363,7 @@ add('Finale',(m)=>{
   lessonTable();
   intro('Round 3 · Connections','3','Connections','Find the four hidden groups',['16 tiles hide <b>4 groups of 4</b>. Select four and submit.','The four group names are shown; the class gets <b>4 mistakes</b>.','Award up to <b>5 pts</b> to the team that cracks the most groups.'],'The Katipunan’s founding, Jacinto’s writing, and what does and doesn’t decide a person’s worth (Rules 5 & 13).');
   CONNECT.forEach(connections);
-  intro('Round 4 · Which Rule Was Broken?','4','Which Rule Was Broken?','The Kartilya in student life today',['Read the scenario out loud. Teams agree on a letter (A–D).','Click the class’s answer, then reveal. Correct teams get <b>2 pts</b>.'],'How the Kartilya’s principles apply today: Rules 2, 3, 6, 7, 8, 9, 10, 11, 12 and 13.');
+  intro('Round 4 · Which Rule Was Broken?','4','Which Rule Was Broken?','The Kartilya in student life today',['Choose the best Kartilya rule that is being violated by the scenario.','Correct teams get <b>2 pts</b>.'],'How the Kartilya’s principles apply today: Rules 2, 3, 6, 7, 8, 9, 10, 11, 12 and 13.');
   SCEN.forEach(scenario);
   // finale was added earlier; move it to the end
   const finIdx=S.findIndex(s=>s.section==='Finale');
