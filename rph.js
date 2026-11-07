@@ -52,7 +52,12 @@ const PICS=[
      'img/treasurer4.jpg'
  ],
   fact:'Jacinto didn’t stop at writing — he was also the Katipunan’s <b>spokesperson</b> and <b>treasurer</b>.'},
- {a:'KALAYAAN',hint:'“Freedom” — and the Katipunan’s newspaper',pics:['🕊️','🔓','🗽','📰'],
+ {a:'KALAYAAN',hint:'“Freedom” — and the Katipunan’s newspaper',pics:[
+     'img/kalayaan1.jpg',
+     'img/kalayaan2.jpg',
+     'img/kalayaan3.jpg',
+     'img/kalayaan4.jpg'
+ ],
   fact:'Jacinto contributed to the Katipunan’s newspaper, <b><i>Kalayaan</i></b> (“Freedom”), under the pen name <b>Dimas-Ilaw</b>.'}
 ];
 
