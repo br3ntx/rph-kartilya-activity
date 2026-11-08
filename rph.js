@@ -64,9 +64,7 @@ const PICS=[
 const WORDLE=[
  {a:'SHADE',rule:1,q:'What’s one noble cause you’d give your time to as a student — and who gets “shade” from it?'},
  {a:'REASON',rule:4,q:'When has a decision made out of anger or hype (instead of reason) backfired on someone you know?'},
- {a:'EQUAL',rule:5,q:'People can differ in knowledge, wealth, and beauty — but not in humanity. Where do we still see people treated as “less” today?'},
- {a:'HONOR',rule:6,q:'Would you take a higher grade if it meant cutting corners? What does choosing honor look like in school?'},
- {a:'TIME',rule:8,q:'Money can be earned back, time can’t. What’s one way students squander time — and why would Jacinto treat it so seriously?'}
+ {a:'EQUAL',rule:5,q:'People can differ in knowledge, wealth, and beauty — but not in humanity. Where do we still see people treated as “less” today?'}
 ];
 
 const SCEN=[
@@ -74,9 +72,7 @@ const SCEN=[
  {t:'A classmate trusts you with something personal. That night, you post it in the block group chat “as a joke.”',o:[4,7,10,13],a:10,why:'Jacinto says intelligence shows in being careful with words and keeping secrets.',q:'What does “keeping secrets” mean in the age of screenshots?'},
  {t:'Your groupmate says, “I’ll finish my part by Friday, promise!” Friday comes - they’re offline and ghosting the group chat.',o:[1,7,8,11],a:7,why:'An honorable person’s word can be trusted. A broken promise breaks that trust.',q:'How do you rebuild trust after breaking your word?'},
  {t:'A transferee from the province gets teased every day because of their accent. The rest of the class either laughs along or stays quiet.',o:[2,6,8,9],a:9,why:'The Kartilya asks us to stand up for the oppressed and against those who oppress them — silence lets it continue.',q:'What’s a realistic way to “stand up” for someone in class?'},
- {t:'When forming groups, one student only invites the rich, popular, good-looking classmates.',o:[3,8,10,13],a:13,why:'A person’s value isn’t determined by status or appearance, but by behavior, honesty, honor, and fairness.',q:'What qualities should actually matter when choosing groupmates?'},
- {t:'You comfort a friend who failed an exam… then laugh about it with others behind their back.',o:[3,8,11,14],a:3,why:'True kindness means compassion, love for others, and being truthful — not kindness only to someone’s face.',q:'What’s the difference between being nice and being kind?'},
- {t:'The deadline is tomorrow. You’ve known about it for three weeks, but spent all that time scrolling and gaming.',o:[1,7,8,13],a:8,why:'Lost wealth can be regained, but lost time is gone forever.',q:'What’s one habit that “steals” your time the most?'}
+ {t:'When forming groups, one student only invites the rich, popular, good-looking classmates.',o:[3,8,10,13],a:13,why:'A person’s value isn’t determined by status or appearance, but by behavior, honesty, honor, and fairness.',q:'What qualities should actually matter when choosing groupmates?'}
 ];
 
 const TEAM_COLORS=['#D62839','#1F7AE0','#E07A1F','#3E9B5F','#9B5DE5','#E2A721','#14B8A6','#EC4899','#64748B','#84CC16'];
@@ -318,10 +314,10 @@ add('Finale',(m)=>{
   S.push(...titleTeamsObj);
   const tail=[];
   // Round 1
-  intro('Round 1 · 4 Pics 1 Word','1','4 Pics 1 Word','Jacinto and the Katipunan',['Four pictures, one word. Use the hint and the letter bank.','Teams take turns: one guess per turn. Wrong guess? Next team.','Worth <b>3 pts</b>. Each revealed letter costs <b>1 pt</b>.'],'The Katipunan’s name and founding, Jacinto’s nickname and roles, the <i>Kartilya</i>, and the newspaper <i>Kalayaan</i>.');
+  intro('Round 1 · 4 Pics 1 Word','1','4 Pics 1 Word','Jacinto and the Katipunan',['Four pictures, one word. Use the hint and the letter bank.','First to raise their hand gets to answer; one guess per turn. Wrong guess? Next team.','<b>3 pts</b> per correct answer.'],'The Katipunan’s name and founding, Jacinto’s nickname and roles, the <i>Kartilya</i>, and the newspaper <i>Kalayaan</i>.');
   PICS.forEach(fourPics);
   lessonJacinto();
-  intro('Round 2 · Wordle','2','Wordle','Keywords hidden in the rules',['Guess the hidden word from one of the 14 rules in <b>6 tries</b>.','<span style="color:#7FD39B;font-weight:700">Green</span> = right spot, <span style="color:var(--yellow);font-weight:700">yellow</span> = wrong spot, gray = not in the word.','The rule clue is shown with the word blanked out. Solve on guess 1 for <b>6 pts</b>, guess 2 for 5, and so on.'],'Rules 1, 4, 5, 6 and 8. Each solved word reveals its full rule.');
+  intro('Round 2 · Wordle','2','Wordle','Keywords hidden in the rules',['Guess the hidden word from one of the 14 rules in <b>6 tries</b>.','<span style="color:#7FD39B;font-weight:700">Green</span> = right spot, <span style="color:var(--yellow);font-weight:700">yellow</span> = wrong spot, gray = not in the word.','The rule clue is shown with the word blanked out. Solve on guess 1 for <b>6 pts</b>, guess 2 for 5, and so on.'],'Rules 1, 4 and 5. Each solved word reveals its full rule.');
   WORDLE.forEach(wordle);
   lessonTable();
   intro('Round 3 · Which Rule Was Broken?','3','Which Rule Was Broken?','The Kartilya in student life today',['Choose the best Kartilya rule that is being violated by the scenario.','Correct teams get <b>2 pts</b>.'],'How the Kartilya’s principles apply today: Rules 2, 3, 6, 7, 8, 9, 10, 11, 12 and 13.');
