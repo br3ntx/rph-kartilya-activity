@@ -139,7 +139,6 @@ add('Teams',(m)=>{
     h('div',{style:'display:flex;gap:28px;flex:1;min-height:0'},
       h('div',{style:'width:460px;display:flex;flex-direction:column;gap:14px'},
         h('div',{class:'row'},inp,h('button',{class:'btn',style:'height:50px',onclick:addTeam},'Add')),
-        h('p',{class:'muted',style:'margin:0;font-size:15px;line-height:1.5'},'Type a name and press Enter. Click a name to rename it. Scores save in this browser, so a refresh won’t wipe them.'),
         h('div',{class:'row',style:'margin-top:auto'},
           h('button',{class:'btn ghost sm',onclick:()=>{teams.forEach(t=>t.score=0);save();rerender();toast('Scores reset')}},'Reset scores'),
           h('button',{class:'btn ghost sm',onclick:()=>{if(confirmClear())rerender()}},'Remove all teams'))
