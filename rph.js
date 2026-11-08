@@ -69,14 +69,6 @@ const WORDLE=[
  {a:'TIME',rule:8,q:'Money can be earned back, time can’t. What’s one way students squander time — and why would Jacinto treat it so seriously?'}
 ];
 
-const CONNECT=[
- {title:'Jacinto, the Katipunan & the Kartilya',groups:[
-  {name:'The founding of the Katipunan',items:['Bonifacio','Diwa','Plata','1892'],why:'Andr\u00e9s Bonifacio founded it in 1892 with Ladislao Diwa and Teodoro Plata.'},
-  {name:'Jacinto\u2019s writing',items:['Kartilya','Kalayaan','Dimas-Ilaw','Malolos Constitution'],why:'His guidebook, his newspaper, his pen name, and the first constitution the Kartilya influenced.'},
-  {name:'Doesn\u2019t decide a person\u2019s worth',items:['Skin color','Wealth','Status','Appearance'],why:'Rules 5 & 13: all humans are equal; value isn\u2019t status or appearance.'},
-  {name:'What DOES decide a person\u2019s worth',items:['Honesty','Honor','Fairness','Love for homeland'],why:'Rule 13: good behavior, honesty, honor, fairness, love for homeland.'}]}
-];
-
 const SCEN=[
  {t:'Your org holds a feeding program. One member shows up only for the photo, posts it with #blessed, and leaves before the actual work starts.',o:[2,7,9,13],a:2,why:'The good deed was done for clout, not out of a genuine desire to do good — so it loses its value.',q:'Is a good deed still “good” if it’s mainly done for likes?'},
  {t:'A classmate trusts you with something personal. That night, you post it in the block group chat “as a joke.”',o:[4,7,10,13],a:10,why:'Jacinto says intelligence shows in being careful with words and keeping secrets.',q:'What does “keeping secrets” mean in the age of screenshots?'},
@@ -289,38 +281,9 @@ function wordle(d,i){
 }
 function wKey(st,k,A,MAX){if(st.done)return;if(k==='Backspace'){st.c=st.c.slice(0,-1)}else if(k==='Enter'){if(st.c.length!==A.length){st.bad=true;toast('Need '+A.length+' letters');setTimeout(()=>{st.bad=false;rerender()},450)}else{st.g.push(st.c);st.c='';if(st.g[st.g.length-1]===A){st.done=st.won=true;toast('Solved!');setTimeout(()=>{st.rev=true;rerender()},900)}else if(st.g.length>=MAX){st.done=true;setTimeout(()=>{st.rev=true;rerender()},900)}}}else if(/^[a-zA-Z]$/.test(k)&&st.c.length<A.length){st.c+=k.toUpperCase()}rerender()}
 
-/* --- Connections --- */
-const CCOL=['#F2CF5B','#8FC27A','#9DB8E8','#B99BD8'];
-function connections(d,i){
-  add('Round 3 · Connections',(m,st)=>{
-    if(!st.init){st.init=true;st.tiles=shuffle(d.groups.flatMap(g=>g.items),hash(d.title));st.sel=[];st.solved=[];st.mis=4;}
-    const done=new Set(st.solved.flatMap(gi=>d.groups[gi].items));
-    const rem=st.tiles.filter(t=>!done.has(t));
-    const all=st.solved.length===4;
-    const reset=()=>{st.init=false;st.failed=false;st.given=[];rerender()};
-    const submit=()=>{if(st.sel.length!==4)return;const gi=d.groups.findIndex(g=>st.sel.every(s=>g.items.includes(s)));if(gi>=0){st.solved.push(gi);st.sel=[];toast(st.solved.length===4?'All groups found!':'Group found!')}else{const best=Math.max(...d.groups.map(g=>st.sel.filter(s=>g.items.includes(s)).length));st.mis--;toast(best===3?'One away…':'Not a group');if(st.mis<=0){d.groups.forEach((_,k)=>{if(!st.solved.includes(k))st.solved.push(k)});st.sel=[];st.failed=true}}rerender()};
-    m.append(h('div',{class:'screen',style:'align-items:center;gap:14px;padding-top:18px;padding-bottom:16px'},
-      h('div',{style:'text-align:center'},h('span',{class:'disp',style:'font-size:26px'},all?(st.failed?'Here are the groups':'Nice! All four groups found'):'Create four groups of four'),h('div',{class:'muted',style:'font-size:14px;margin-top:2px'},d.title)),
-      !all?h('div',{class:'row',style:'gap:8px;flex-wrap:wrap;justify-content:center'},d.groups.map((g,k)=>st.solved.includes(k)?null:h('span',{style:'padding:5px 12px;border-radius:999px;font-size:13px;font-weight:800;color:var(--ink);background:'+CCOL[k]},g.name))):null,
-      h('div',{style:'width:1000px;display:flex;flex-direction:column;gap:10px'},
-        st.solved.map(gi=>{const g=d.groups[gi];return h('div',{class:'cbar',style:'background:'+CCOL[gi]},h('b',null,g.name),h('span',null,g.items.join(', ')),h('em',null,g.why))}),
-        rem.length?h('div',{class:'cgrid'},rem.map(t=>h('button',{class:'ct'+(st.sel.includes(t)?' s':''),onclick:()=>{if(st.sel.includes(t))st.sel=st.sel.filter(x=>x!==t);else if(st.sel.length<4)st.sel.push(t);rerender()}},t))):null),
-      all?h('div',{class:'panel',style:'padding:12px 18px;margin-top:4px;display:flex;gap:16px;align-items:center'},awardRow(st,5),h('button',{class:'btn ghost sm',onclick:reset},'Reset'),h('button',{class:'btn sm',onclick:()=>go(cur+1)},'Next →'))
-      :h('div',{style:'display:flex;flex-direction:column;align-items:center;gap:12px'},
-        h('div',{class:'row',style:'font-size:15px;color:var(--soft)'},'Mistakes remaining:',h('div',{class:'dots'},[0,1,2,3].map(k=>h('span',{class:'dot'+(k<st.mis?'':' o')})))),
-        h('div',{class:'row'},
-          h('button',{class:'btn ghost sm',style:'border-radius:999px',onclick:()=>{st.tiles=shuffle(st.tiles);rerender()}},'Shuffle'),
-          h('button',{class:'btn ghost sm',style:'border-radius:999px',onclick:()=>{st.sel=[];rerender()}},'Deselect all'),
-          h('button',{class:'btn light sm',style:'border-radius:999px;font-weight:800',disabled:st.sel.length!==4,onclick:submit},'Submit'),
-          h('button',{class:'btn ghost sm',style:'border-radius:999px',onclick:()=>{d.groups.forEach((_,k)=>{if(!st.solved.includes(k))st.solved.push(k)});st.sel=[];st.failed=true;rerender()}},'Reveal all'),
-          h('button',{class:'btn ghost sm',style:'border-radius:999px',onclick:reset},'Reset')))
-    ));
-  });
-}
-
 /* --- Scenarios --- */
 function scenario(d,i){
-  add('Round 4 · Which Rule Was Broken? · '+(i+1)+' of '+SCEN.length,(m,st)=>{
+  add('Round 3 · Which Rule Was Broken? · '+(i+1)+' of '+SCEN.length,(m,st)=>{
     if(!st.init){st.init=true;st.o=shuffle(d.o,hash(d.t));}
     const L='ABCD';
     m.append(h('div',{class:'screen',style:'gap:14px;padding-top:22px;padding-bottom:18px'},
@@ -361,9 +324,7 @@ add('Finale',(m)=>{
   intro('Round 2 · Wordle','2','Wordle','Keywords hidden in the rules',['Guess the hidden word from one of the 14 rules in <b>6 tries</b>.','<span style="color:#7FD39B;font-weight:700">Green</span> = right spot, <span style="color:var(--yellow);font-weight:700">yellow</span> = wrong spot, gray = not in the word.','The rule clue is shown with the word blanked out. Solve on guess 1 for <b>6 pts</b>, guess 2 for 5, and so on.'],'Rules 1, 4, 5, 6 and 8. Each solved word reveals its full rule.');
   WORDLE.forEach(wordle);
   lessonTable();
-  intro('Round 3 · Connections','3','Connections','Find the four hidden groups',['16 tiles hide <b>4 groups of 4</b>. Select four and submit.','The four group names are shown; the class gets <b>4 mistakes</b>.','Award up to <b>5 pts</b> to the team that cracks the most groups.'],'The Katipunan’s founding, Jacinto’s writing, and what does and doesn’t decide a person’s worth (Rules 5 & 13).');
-  CONNECT.forEach(connections);
-  intro('Round 4 · Which Rule Was Broken?','4','Which Rule Was Broken?','The Kartilya in student life today',['Choose the best Kartilya rule that is being violated by the scenario.','Correct teams get <b>2 pts</b>.'],'How the Kartilya’s principles apply today: Rules 2, 3, 6, 7, 8, 9, 10, 11, 12 and 13.');
+  intro('Round 3 · Which Rule Was Broken?','3','Which Rule Was Broken?','The Kartilya in student life today',['Choose the best Kartilya rule that is being violated by the scenario.','Correct teams get <b>2 pts</b>.'],'How the Kartilya’s principles apply today: Rules 2, 3, 6, 7, 8, 9, 10, 11, 12 and 13.');
   SCEN.forEach(scenario);
   // finale was added earlier; move it to the end
   const finIdx=S.findIndex(s=>s.section==='Finale');
