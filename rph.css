@@ -98,18 +98,6 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .key.g{background:var(--green);color:#fff}.key.y{background:var(--yellow);color:var(--bg)}.key.x{background:#232A33;color:#5B6470}
 .blank{display:inline-block;min-width:96px;border-bottom:3px solid var(--gold);height:1em;vertical-align:baseline}
 .hl{color:var(--crimson);font-weight:800}
-/* connections */
-.cgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.ct{height:74px;border:0;border-radius:10px;background:#E9E4D8;color:var(--ink);font-weight:800;font-size:16px;text-transform:uppercase;padding:0 8px;line-height:1.15}
-.ct.s{background:#5A6472;color:#fff}
-.ct:hover{filter:brightness(.96)}
-.cbar{min-height:74px;border-radius:10px;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 16px;text-align:center;animation:fade .3s}
-.cbar b{font-size:15px;letter-spacing:.5px;text-transform:uppercase}
-.cbar span{font-size:15px}
-.cbar em{font-size:12px;font-style:normal;opacity:.8}
-.dots{display:flex;gap:8px}
-.dot{width:14px;height:14px;border-radius:50%;background:var(--paper)}
-.dot.o{background:transparent;border:2px solid #4A535E}
 /* scenario */
 .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .opt{display:flex;gap:16px;align-items:center;text-align:left;padding:14px 18px;border-radius:14px;border:2px solid var(--line);background:var(--panel);color:var(--text);min-height:78px}
