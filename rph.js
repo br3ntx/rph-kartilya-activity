@@ -363,6 +363,8 @@ function toggleFull(){try{if(!document.fullscreenElement)document.documentElemen
 document.getElementById('bFull').onclick=toggleFull;
 document.getElementById('bMusic').onclick=()=>Sound.toggleMusic();
 document.getElementById('bSfx').onclick=()=>Sound.toggleSfx();
+document.getElementById('musicVolume').oninput=e=>Sound.setMusicVolume(e.target.value);
+document.getElementById('sfxVolume').oninput=e=>Sound.setSfxVolume(e.target.value);
 Sound.updateButtons();
 document.addEventListener('keydown',e=>{
   const tag=(e.target&&e.target.tagName)||'';

@@ -12,18 +12,21 @@ const SFX_VOLUME = 0.5;
 const Sound = (() => {
   const pref = (k, d) => { try { const v = localStorage.getItem('kshow_' + k); return v == null ? d : v === '1'; } catch (e) { return d; } };
   const setPref = (k, v) => { try { localStorage.setItem('kshow_' + k, v ? '1' : '0'); } catch (e) {} };
+  const volumePref = (k, d) => { try { const v = Number(localStorage.getItem('kshow_' + k)); return Number.isFinite(v) ? Math.min(1, Math.max(0, v)) : d; } catch (e) { return d; } };
+  const setVolumePref = (k, v) => { try { localStorage.setItem('kshow_' + k, String(v)); } catch (e) {} };
   let musicOn = pref('music', true), sfxOn = pref('sfx', true);
+  let musicVolume = volumePref('musicVolume', MUSIC_VOLUME), sfxVolume = volumePref('sfxVolume', SFX_VOLUME);
   let ctx = null, master = null, unlocked = false, musicOk = true;
 
   const music = new Audio(BG_MUSIC);
-  music.loop = true; music.preload = 'auto'; music.volume = MUSIC_VOLUME;
+  music.loop = true; music.preload = 'auto'; music.volume = musicVolume;
   music.addEventListener('error', () => { musicOk = false; updateButtons(); });
 
   function ac() {
     if (!ctx) {
       const C = window.AudioContext || window.webkitAudioContext;
       if (!C) return null;
-      ctx = new C(); master = ctx.createGain(); master.gain.value = SFX_VOLUME; master.connect(ctx.destination);
+      ctx = new C(); master = ctx.createGain(); master.gain.value = sfxVolume; master.connect(ctx.destination);
     }
     if (ctx.state === 'suspended') ctx.resume();
     return ctx;
@@ -63,8 +66,8 @@ const Sound = (() => {
   // lower the music briefly so a fanfare can be heard
   function duck(sec) {
     if (!musicOn || music.paused) return;
-    music.volume = MUSIC_VOLUME * 0.3;
-    clearTimeout(duck._t); duck._t = setTimeout(() => { music.volume = MUSIC_VOLUME; }, sec * 1000);
+    music.volume = musicVolume * 0.3;
+    clearTimeout(duck._t); duck._t = setTimeout(() => { music.volume = musicVolume; }, sec * 1000);
   }
 
   const N = { C4: 261.6, E4: 329.6, G4: 392, A4: 440, B4: 493.9, C5: 523.3, D5: 587.3, E5: 659.3, F5: 698.5, G5: 784, A5: 880, B5: 987.8, C6: 1046.5, E6: 1318.5, G6: 1568 };
@@ -111,8 +114,23 @@ const Sound = (() => {
 
   function updateButtons() {
     const bm = document.getElementById('bMusic'), bs = document.getElementById('bSfx');
+    const mv = document.getElementById('musicVolume'), sv = document.getElementById('sfxVolume');
     if (bm) { bm.classList.toggle('off', !musicOn || !musicOk); bm.title = !musicOk ? 'Music file not found: ' + BG_MUSIC : musicOn ? 'Music on (M)' : 'Music off (M)'; }
     if (bs) { bs.classList.toggle('off', !sfxOn); bs.title = sfxOn ? 'Sound effects on (S)' : 'Sound effects off (S)'; }
+    if (mv) mv.value = String(musicVolume);
+    if (sv) sv.value = String(sfxVolume);
+  }
+  function setMusicVolume(value) {
+    musicVolume = Math.min(1, Math.max(0, Number(value)));
+    music.volume = musicVolume;
+    setVolumePref('musicVolume', musicVolume);
+    updateButtons();
+  }
+  function setSfxVolume(value) {
+    sfxVolume = Math.min(1, Math.max(0, Number(value)));
+    if (master) master.gain.value = sfxVolume;
+    setVolumePref('sfxVolume', sfxVolume);
+    updateButtons();
   }
   function toggleMusic() {
     if (!musicOk) { if (typeof toast === 'function') toast('Music file not found: ' + BG_MUSIC); return; }
@@ -123,6 +141,6 @@ const Sound = (() => {
   function toggleSfx() { sfxOn = !sfxOn; setPref('sfx', sfxOn); if (sfxOn) fx.pop(); updateButtons(); }
 
   document.addEventListener('DOMContentLoaded', updateButtons);
-  return { play, toggleMusic, toggleSfx, updateButtons };
+  return { play, toggleMusic, toggleSfx, setMusicVolume, setSfxVolume, updateButtons };
 })();
 const sfx = Sound.play;
